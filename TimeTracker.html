@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <base target="_top">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" 
+    integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>   
+    <script>
+    
+    function ClockIn()
+    {
+    
+    $('#message').html("");
+    
+    if(<?= username ?> != '')
+    {
+    
+    google.script.run.withSuccessHandler(function(ar) 
+    {
+     console.log(ar);
+    ar.forEach(function(item, index) 
+    {
+    
+    if(item[0] == 'SUCCESS')
+    {
+    var message = <?= username ?> + ' Clocked in at ' + item[1];
+    $('#message').html(message);
+    document.getElementById("message").className = "alert alert-primary";
+    }
+    else
+    {
+    var message = <?= username ?> + ' ' + item[0];
+    $('#message').html(message);
+    document.getElementById("message").className = "alert alert-warning"; 
+    }
+    
+     
+    });
+    
+    }).clockIn(<?= username ?>);
+    
+    }
+    }
+    
+    function ClockOut()
+    {
+    
+    $('#message').html("");
+    
+    if(<?= username ?> != '')
+    {
+    
+    google.script.run.withSuccessHandler(function(ar) 
+    {
+    console.log(ar);
+    ar.forEach(function(item, index) 
+    {
+    
+    if(item[0] == 'SUCCESS')
+    {
+    var message = <?= username ?> + ' Clocked out at ' + item[1];
+    $('#message').html(message);
+    document.getElementById("message").className = "alert alert-primary";
+    }
+    else
+    {
+    var message = <?= username ?> + ' ' + item[0];
+    $('#message').html(message);
+    document.getElementById("message").className = "alert alert-warning"; 
+    }
+        
+    });
+    
+    }).clockOut(<?= username ?>);
+    
+    }
+    }
+    </script>
+  </head>
+  <body>
+  <div style="padding: 10px;" >
+  <h1>JDAN Enterprise, LLC</h1><br>
+  <?var url = getUrl();?>
+    <form method="post" action="<?= url ?>" >
+    <span style="font-weight: bold" >Welcome <?= username ?></span>
+    <input type="hidden" value="<?= username ?>" name="username" />
+    <input type="submit" value="Logout" name="LogoutButton" />
+    <span><?= message ?></span> 
+    </form>
+  <form>
+  <div class="form-row">
+  <div class="form-group col-md-4">
+  </div>
+  </div>
+  <div class="form-row">
+  <div class="form-group col-md-4">
+  <input type="button" value="Clock In" id="clockin" class="btn btn-primary" onclick="ClockIn()" />
+  <input type="button" value="Meal Start" id="mealstart" class="btn btn-primary" onclick="MealIn()" />
+  <input type="button" value="Meal End" id="mealend" class="btn btn-primary" onclick="MealOut()" />
+  <input type="button" value="Clock Out" id="clockout" class="btn btn-primary" onclick="ClockOut()" /><br><br>
+  <div class="alert alert-primary" role="alert" id="message">
+  </div>
+  </div> 
+  </div> 
+  </form>
+  </div>
+  </body>
+</html>

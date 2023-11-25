@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <base target="_top">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <style>
+    body{text-align:center;font-family:times;margin-top:90px;}
+  input{
+  width:190px;
+  height:20px;
+  border:1px dashed black;
+  font-family:times;margin:5px;
+  padding:5px;text-align:center;
+  border-radius:15px
+  }
+  input[type="submit"]{
+    background-color:green;
+    color:white;width:100px;
+    border-radius:15px;
+    padding:0px;height:30px;
+    }
+ input:hover[type="submit"] {
+    background: red;
+    }
+    hr{border:1px solid red;}
+</style>
+</head>
+<h1><a href="https://jdanenterprise.com/" target="_self">JDAN Enterprise, LLC</a></h1><br>
+<body >
+ <?var url = getUrl();?>
+ <form method="post" action="<?= url ?>">
+   <label>User Name</label><br>
+   <input type="text"placeholder="UserId" name="username"><br>
+   <label>Password</label><br>
+   <input type="password"name="password" placeholder="password"/><br>
+   <input type="submit" value="Login" name="LoginButton" /><hr>
+   <span><?= message ?></span>
+  </body>
+  </html>

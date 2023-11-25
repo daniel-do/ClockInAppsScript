@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <base target="_top">
+  </head>
+   <body>
+    <h1>Index</h1>
+    <?var url = getUrl();?>
+    <form method="post" action="<?= url ?>" >
+    <span style="font-weight: bold" >Welcome <?= username ?></span>
+    <input type="hidden" value="<?= username ?>" name="username" />
+    <input type="submit" value="Logout" name="LogoutButton" />
+    <span><?= message ?></span> 
+    </form>
+   Other function include here.
+   </body>
+</html>
